@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import Dashboard from "./components/dashboard/Dashboard";
+import Students from "./components/class/Students";
+import Requirements from "./components/class/Requirements";
+import Marksheet from "./components/class/Marksheet";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/marksheet" element={<Sidebar />} />
+      <Route path="/academia" element={<Sidebar />} />
+      <Route path="/register" element={<Sidebar />} />
+
+      <Route path="/class/students/:classId" element={<Students />} />
+      <Route path="/class/requirements/:classId" element={<Requirements />} />
+      <Route path="/class/marksheet/:classId" element={<Marksheet />} />
+    </Routes>
+   </BrowserRouter>
   );
 }
 
