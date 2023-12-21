@@ -1,10 +1,41 @@
-# Getting Started with Create React App
+# School Management System FrontEnd
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+After thorough re-thinking and feedback from customers. I found out that having the S.M.S with only Laravel using blade templates was making it hard to scale and maintain. This created need for making it just an api and then create a react front end for it 
 
-## Available Scripts
+## Reasons for changing the app
 
-In the project directory, you can run:
+- Extendability
+- More requrements were comming in and their came need for modularity
+- Scalability
+- Ease in troubleshooting
+- We needed javascript to make the front End more user friendly
+
+The backend laravel server is currently under refactor optimization to modify and make it an api instead of a full featured web stack. Click [here](https://github.com/othie12/Laravel-School-Management-system) to see it.
+
+## Running the frontEnd
+`Make sure You have node.js installed on your machine as it is a dependency to run react`
+
+`You will need to first clone the api and get the laravel server running since react will have to make api requests to it`
+
+First clone the repo.
+```
+git clone https://github.com/othie12/sms-frontend.git
+```
+
+Then navigate to the directory where it has been put
+```
+cd sms-frontend
+```
+
+Then install dependencies
+```
+npm install
+```
+
+Then run the dev server
+```
+npm start
+```
 
 ### `npm start`
 
