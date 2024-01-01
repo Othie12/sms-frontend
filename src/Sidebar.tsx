@@ -1,27 +1,53 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "./logo.png";
 import { useState } from "react";
 import { NavLink } from "./components/Interfaces";
+import { useAuth } from "./AuthContext";
 
 export default function Sidebar(){
-
+    const {authUser, unsetCurrentUser} = useAuth();
+    const imgUrl = process.env.REACT_APP_IMG_URL;
+    const navigate = useNavigate();
     const links: NavLink[] = [
-        {pathName: '/', name: 'Dashboard'},  
-        {pathName: '/marksheet', name: 'Marksheet'},  
-        {pathName: '/academia', name: 'Academia'},  
-        {pathName: '/register', name: 'register'},  
+        {pathName: '/class', name: 'Dashboard'},  
+        {pathName: '/marksheet', name: 'Marksheet', sublinks: 
+            authUser?.classes?.map(clas => ({pathName: '#', name: clas.name}))
+        },  
+        {pathName: '/academia', name: 'Academia', sublinks: [
+            {pathName: '/academia/aggregation/' + authUser?.class?.id, name: 'Aggregation'},
+            {pathName: '/academia/comments/' + authUser?.class?.id, name: 'Comments'},
+            {pathName: '/academia/attendance', name: 'Attendance'},
+            {pathName: '/academia/calendar', name: 'Calendar'},
+        ]},  
+        {pathName: '/register', name: 'register', sublinks: [
+            {pathName: '#', name: 'Student'},
+            {pathName: '#', name: 'Subject'},
+            {pathName: '#', name: 'Parent'},
+            {pathName: '#', name: 'Requirement'},
+        ]},  
+    ]
+    const links2: NavLink[] = [
+        {pathName: '#', name: 'Profile'},
     ]
 
     return(
         <div className='bg-purple-500 min-h-screen p-4 w-60 border-x-slate-700 overscroll-contain min-w-[300px]'>
-            <img src={logo} className="rounded-full w-1/3 mx-auto mb-4" alt="logo" />
-
+            <img src={authUser?.profile_pic_filepath === null ? logo : `${imgUrl}/${authUser?.profile_pic_filepath}`} className="rounded-full w-1/3 mx-auto mb-4" alt="logo" />
             <nav className="text-white rounded-md overscroll-contain sticky top-0 bg-black/20 p-3 min-h-[300px]">
-                <ul>
-                    <div>
+                <ul className="divide-y divide-gray-50">
+                    <div className="">
                         {links.map(li => 
                             <LinkItem l={li} />
                         )}
+                    </div>
+                    <div className="mt-4">
+                        {links2.map(li => 
+                            <LinkItem l={li} />
+                        )}
+                        <button type="button" className="p-2 rounded-lg bg-black/50 ring-1 ring-black text-white" 
+                        onClick={() => {unsetCurrentUser() ; navigate("/")}}>
+                            Logout
+                        </button>
                     </div>
                 </ul>
             </nav>
@@ -46,7 +72,7 @@ function LinkItem({l}: linkProps){
   
     return(
         <li key={l.name} className={`border-slate-900 rounded-md`}
-        onClick={() => {setHidden(hidden === '' ? 'hidden' : ''); setCaret(caret === down ? right : down)}}
+        onClick={() => {setHidden(hidden === '' ? 'hidden' : ''); setCaret(hidden === '' ? right : down)}}
         >
             {l.sublinks ?
                 <span className="cursor-pointer">
@@ -54,7 +80,7 @@ function LinkItem({l}: linkProps){
                         {l.name}
                         {caret}
                     </span>
-                <ul className={`ml-4 font-light ${hidden}`}>
+                <ul className={`ml-4 w-full font-light ${hidden}`}>
                     {l.sublinks.map(sl => 
                         <li className="w-full">
                             <Link className="hover:bg-slate-200/20 rounded-md px-3 w-full p-2" to={sl.pathName}>{sl.name}</Link>

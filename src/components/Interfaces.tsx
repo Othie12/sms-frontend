@@ -9,6 +9,7 @@ export interface SchoolClass{
 }
 
 export interface User{
+    id: string;
     name: string;
     email?: string;
     password?: string;
@@ -95,7 +96,7 @@ export interface Mark{
 }
 
 export interface Grading{
-    id: number;
+    id?: number;
     class_id?: string
     marks_from?: number
     marks_to?: number

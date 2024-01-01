@@ -15,3 +15,12 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .bgimg {
+    @apply bg-no-repeat bg-cover bg-[url('/src/images/bg.jpg')];
+  }
+  .inputstyle {
+    @apply rounded-md bg-white/20 p-1;
+  }
+}
