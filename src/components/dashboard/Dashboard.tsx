@@ -38,7 +38,7 @@ interface ClassCardProps{
 function ClassCard({c}: ClassCardProps){
     return (
         <Link to={"/class/students/" + c.id}>
-            <div className="bg-purple-300 transition duration-300 rounded-lg p-4 hover:bg-purple-500" key={c.id}>
+            <div className="bg-purple-300 transition duration-300 rounded-lg p-4 hover:bg-purple-500 shadowstyle-1" key={c.id}>
                 <p className="font-bold bg-white/30 p-2 rounded-lg text-gray-800">{c.name}</p>
                 <p className="font-light">{c.class_teacher?.name}</p>
                 <p className="text-purple-900">Girls: {c.girls}</p>

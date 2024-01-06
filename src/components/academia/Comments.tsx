@@ -24,7 +24,7 @@ export default function Comments(){
     console.log(comments)
     return(
         <main className="flex">
-        <Sidebar />
+            <Sidebar />
             <div className="w-full">
                 <div className="rounded-lg w-[98%] min-h-[85%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
                     <table className="w-full">
@@ -45,7 +45,7 @@ export default function Comments(){
                     </table>
                 </div>
             </div>
-    </main>
+        </main>
     );
 }
 

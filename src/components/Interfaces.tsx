@@ -63,8 +63,8 @@ export interface Requirement{
 }
 
 export interface Period{
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
     date_from?: string;
     date_to?: string;
     nxt?: Period;

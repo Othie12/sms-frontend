@@ -16,14 +16,14 @@ export default function Sidebar(){
         {pathName: '/academia', name: 'Academia', sublinks: [
             {pathName: '/academia/aggregation/' + authUser?.class?.id, name: 'Aggregation'},
             {pathName: '/academia/comments/' + authUser?.class?.id, name: 'Comments'},
-            {pathName: '/academia/attendance', name: 'Attendance'},
+            {pathName: '/academia/attendance/' + authUser?.class?.id, name: 'Attendance'},
             {pathName: '/academia/calendar', name: 'Calendar'},
         ]},  
         {pathName: '/register', name: 'register', sublinks: [
-            {pathName: '#', name: 'Student'},
-            {pathName: '#', name: 'Subject'},
-            {pathName: '#', name: 'Parent'},
-            {pathName: '#', name: 'Requirement'},
+            {pathName: '/register/student', name: 'Student'},
+            {pathName: '/register/subject', name: 'Subject'},
+            {pathName: '/register/parent', name: 'Parent'},
+            {pathName: '/register/requirement', name: 'Requirement'},
         ]},  
     ]
     const links2: NavLink[] = [

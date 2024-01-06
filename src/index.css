@@ -20,7 +20,12 @@ code {
   .bgimg {
     @apply bg-no-repeat bg-cover bg-[url('/src/images/bg.jpg')];
   }
+
   .inputstyle {
     @apply rounded-md bg-white/20 p-1;
+  }
+
+  .shadowstyle-1 {
+    @apply shadow-[1px_1px_8px_rgba(00,00,05,0.8),-1px_-1px_6px_rgba(255,255,255,1)] p-3 rounded-md;
   }
 }
