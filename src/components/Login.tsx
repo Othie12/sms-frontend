@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import axios from "axios";
@@ -14,6 +14,17 @@ export default function Login() {
 
     const { setCurrentUser } = useAuth();
 
+    useEffect(() => {
+        axios.get('http://localhost:8000/sanctum/csrf-cookie', {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+            withCredentials: true,
+        })
+        .then(r => console.log(r))
+        .catch(e => console.error(e));
+    }, []);
+
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         axios.post(apiUrl + '/login', {
@@ -22,7 +33,9 @@ export default function Login() {
             },{
                 headers: {
                     "Content-Type": "application/json",
+                    'X-Requested-With': 'XMLHttpRequest',
                 },
+                withCredentials: true,
             }).then(response => {
                 if (response.status === 200){
                     console.log(response.data);
@@ -30,10 +43,10 @@ export default function Login() {
                     navigate('/class');
                 }else {
                     setLoginErr("Wrong name or password");
-                    console.log(response.data.error);
+                    console.log('Err1' + response.data.error);
                 }
             })
-            .catch(error => {console.error(error)
+            .catch(error => {console.error('Err2' + error)
                 setLoginErr("Wrong name or password");
             });
     };

@@ -32,7 +32,7 @@ export default function Attendance(){
         <main className="flex">
             <Sidebar />
             <section className="w-full">
-                <div className="rounded-lg w-[98%] min-h-[85%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
+                <div className="rounded-lg w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
                     <p className="font-light text-purple-900">{statusmsg}</p>
                     {attendanceData.map(item =>
                         <div key={item.id} onClick={() => handleClick(item)}

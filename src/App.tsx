@@ -21,7 +21,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
 
-      <Route path="/marksheet" element={<Sidebar />} />
+      <Route path="/marksheet/:classId" element={<Sidebar />} />
 
       <Route path="/academia/calendar" element={<Calendar />} />
 
@@ -42,6 +42,7 @@ function App() {
       <Route path="/class/students/:classId" element={<Students />} />
       <Route path="/class/requirements/:classId" element={<Requirements />} />
       <Route path="/class/marksheet/:classId" element={<Marksheet />} />
+
     </Routes>
    </BrowserRouter>
   );

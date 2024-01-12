@@ -9,7 +9,7 @@ export default function Calendar(){
         <main className="flex">
             <Sidebar />
             <section className="w-full">
-                <div className="rounded-lg w-[98%] min-h-[85%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
+                <div className="rounded-lg w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
                     <div onSubmit={e => e.preventDefault()} className="md:lg:w-1/2 mx-auto text-slate-600 mb-4">
                         <FormItem name="First term"/>
                         <FormItem name="Second term" />

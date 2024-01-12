@@ -76,7 +76,7 @@ function StudentStats({id, name, setter}: getProps){
             setter(r.data);
         }).catch(e => console.error("Failed to fetch: " + e));
     }, []);
-
+    console.log(items);
     return(
         <tr className="border-b-2 border-purple-400 hover:bg-purple-300">
             <td className="p-2">{name}</td>

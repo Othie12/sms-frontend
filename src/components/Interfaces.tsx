@@ -2,14 +2,14 @@ export interface SchoolClass{
     id: number;
     name: string;
     class_teacher?: User;
-    girls: number;
-    boys: number;
+    girls?: number;
+    boys?: number;
     fees?: number;
     subjects?: Subject[];
 }
 
 export interface User{
-    id: string;
+    id?: string;
     name: string;
     email?: string;
     password?: string;
@@ -17,18 +17,20 @@ export interface User{
     sex?: string;
     contact?: string;
     profile_pic_filepath?: string;
-    subjects?: string[];
+    picture?: File;
+    subjects?: Subject[];
     class?: SchoolClass;
     classes?: SchoolClass[];
     children?: Student[];
 }
 
 export interface Student{
-    id: number
+    id?: number
     name: string
     sex?: string
     dob?: string
     profile_pic_filepath?: string
+    picture?: File;
     parent_id?: string
     class_id?: string
     custom_ct_comm?: string
@@ -43,15 +45,15 @@ export interface Student{
 }
 
 export interface Subject{
-    id: number;
+    id?: number;
     name: string;
-    teachers: User[];
-    classes: SchoolClass[];
-    marks: Mark[]
+    teachers?: User[];
+    classes?: SchoolClass[];
+    marks?: Mark[]
 }
 
 export interface Requirement{
-    id: number;
+    id?: number;
     class_id?: string;
     period_id?: string;
     name?: string;
@@ -71,7 +73,7 @@ export interface Period{
 }
 
 export interface Parent{
-    id: number;
+    id?: number;
     name?: string;
     email?: string;
     sex?: string;
@@ -128,3 +130,10 @@ export interface NavLink {
     name: string;
     sublinks?: Array<NavLink>;
 }
+
+export const AutoCapitalize = (word: string) => {
+    word = word.toLowerCase().split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+    return word;
+};

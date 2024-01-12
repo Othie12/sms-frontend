@@ -11,7 +11,7 @@ export default function Sidebar(){
     const links: NavLink[] = [
         {pathName: '/class', name: 'Dashboard'},  
         {pathName: '/marksheet', name: 'Marksheet', sublinks: 
-            authUser?.classes?.map(clas => ({pathName: '#', name: clas.name}))
+            authUser?.classes?.map(clas => ({pathName: '/marksheet/' + authUser?.class?.id, name: clas.name}))
         },  
         {pathName: '/academia', name: 'Academia', sublinks: [
             {pathName: '/academia/aggregation/' + authUser?.class?.id, name: 'Aggregation'},
@@ -20,6 +20,7 @@ export default function Sidebar(){
             {pathName: '/academia/calendar', name: 'Calendar'},
         ]},  
         {pathName: '/register', name: 'register', sublinks: [
+            {pathName: '/register/staff', name: 'Staff'},
             {pathName: '/register/student', name: 'Student'},
             {pathName: '/register/subject', name: 'Subject'},
             {pathName: '/register/parent', name: 'Parent'},
@@ -37,12 +38,12 @@ export default function Sidebar(){
                 <ul className="divide-y divide-gray-50">
                     <div className="">
                         {links.map(li => 
-                            <LinkItem l={li} />
+                            <LinkItem l={li} key={li.name}/>
                         )}
                     </div>
                     <div className="mt-4">
                         {links2.map(li => 
-                            <LinkItem l={li} />
+                            <LinkItem l={li} key={li.name}/>
                         )}
                         <button type="button" className="p-2 rounded-lg bg-black/50 ring-1 ring-black text-white" 
                         onClick={() => {unsetCurrentUser() ; navigate("/")}}>
@@ -82,7 +83,7 @@ function LinkItem({l}: linkProps){
                     </span>
                 <ul className={`ml-4 w-full font-light ${hidden}`}>
                     {l.sublinks.map(sl => 
-                        <li className="w-full">
+                        <li className="w-full" key={sl.name}>
                             <Link className="hover:bg-slate-200/20 rounded-md px-3 w-full p-2" to={sl.pathName}>{sl.name}</Link>
                         </li>
                     )}

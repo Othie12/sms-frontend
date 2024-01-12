@@ -22,7 +22,13 @@ code {
   }
 
   .inputstyle {
-    @apply rounded-md bg-white/20 p-1;
+    @apply rounded-md p-1 ring-1 bg-gradient-to-br from-purple-500/20 ring-purple-500;
+  }
+  .specialinputstyle {
+    @apply rounded-md p-1 ring-1 bg-gradient-to-br from-pink-500/20 ring-purple-500;
+  }
+  .selectedinputstyle {
+    @apply rounded-md p-1 ring-1 bg-gradient-to-br from-pink-500 ring-purple-500;
   }
 
   .shadowstyle-1 {

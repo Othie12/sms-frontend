@@ -9,7 +9,6 @@ export default function Dashboard(){
     const [classes, SetClasses] = useState<SchoolClass[]>([])
 
     const fetchClasses = () => {
-        console.log(apiUrl)
         axios.get(`${apiUrl}/classes`)
         .then(response => {
             SetClasses(response.data);
@@ -25,7 +24,7 @@ export default function Dashboard(){
                 <Sidebar />
                     <div className="w-full">
                         <div className="grid grid-cols-3 gap-4 p-4">
-                            {classes.map(clas => <ClassCard c={clas} />)}
+                            {classes.map(clas => <ClassCard c={clas} key={clas.id} />)}
                         </div>
                     </div>
             </main>
@@ -43,7 +42,7 @@ function ClassCard({c}: ClassCardProps){
                 <p className="font-light">{c.class_teacher?.name}</p>
                 <p className="text-purple-900">Girls: {c.girls}</p>
                 <p className="text-purple-900">Boys: {c.boys}</p>
-                <p className="font-medium">Total: {c.girls + c.boys}</p>
+                <p className="font-medium">Total: {c.girls && c.boys && c.girls + c.boys}</p>
                 <p className="">Fees: {c.fees}</p>
             </div>
         </Link>
