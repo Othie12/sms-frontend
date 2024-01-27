@@ -31,6 +31,10 @@ code {
     @apply rounded-md p-1 ring-1 bg-gradient-to-br from-pink-500 ring-purple-500;
   }
 
+  .gradient1 {
+    @apply bg-gradient-to-br from-white via-blue-50 to-white;
+  }
+
   .shadowstyle-1 {
     @apply shadow-[1px_1px_8px_rgba(00,00,05,0.8),-1px_-1px_6px_rgba(255,255,255,1)] p-3 rounded-md;
   }

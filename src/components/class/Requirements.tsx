@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Requirement } from "../Interfaces";
+import { Requirement, NavLink } from "../Interfaces";
 import axios from "axios";
 import Sidebar from "../../Sidebar";
 import NavBar from "../dashboard/NavBar";
@@ -10,6 +10,13 @@ export default function Requirements(){
     const apiUrl = process.env.REACT_APP_API_URL;
     const {classId} = useParams();
 
+    //links on the top navbar
+    const links: NavLink[] = [
+        {pathName: '/class/students', name: 'Students'},  
+        {pathName: '/class/marksheet', name: 'Marksheet'},  
+        {pathName: '/class/requirements', name: 'Requirements'},  
+        {pathName: '/class/settings', name: 'Settings'},  
+    ]
     const fetchrequirements = () => {
         axios.get(`${apiUrl}/class/requirements/${classId}`)
         .then(r => {
@@ -26,7 +33,7 @@ export default function Requirements(){
         <main className="flex">
         <Sidebar />
             <div className="w-full">
-                <NavBar classId={classId}/>
+                <NavBar classId={classId} links={links}/>
                 <div className="rounded-lg w-[98%] min-h-[85%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
                     <table className="w-full">
                         <thead>

@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import Dashboard from "./components/dashboard/Dashboard";
 import Students from "./components/class/Students";
 import Requirements from "./components/class/Requirements";
-import Marksheet from "./components/class/Marksheet";
+import ClassMarksheet from "./components/class/Marksheet";
 import Login from "./components/Login";
 import Aggregation from "./components/academia/Aggregation";
 import Comments from "./components/academia/Comments";
@@ -14,18 +14,24 @@ import RegisterParent from "./components/register/Parent";
 import RegisterRequirement from "./components/register/Requirement";
 import RegisterStaff from "./components/register/Staff";
 import RegisterSubject from "./components/register/Subject";
+import Marksheet from "./components/marksheet/marksheet";
+import StudentProfile from "./components/student/Profile";
+import UserProfile from "./components/user/Profile";
+import ClassSettings from "./components/class/Settings";
 
 function App() {
   return (
    <BrowserRouter>
     <Routes>
       <Route path="/" element={<Login />} />
+      
+      <Route path="/marksheet/:classId/:type/:classId?" element={<Marksheet />} />
 
-      <Route path="/marksheet/:classId" element={<Sidebar />} />
-
-      <Route path="/academia/calendar" element={<Calendar />} />
+      <Route path="/student/:id" element={<StudentProfile />} />
+      <Route path="/user/:id" element={<UserProfile />} />
 
       <Route path="/academia" element={<Sidebar />} />
+      <Route path="/academia/calendar" element={<Calendar />} />
       <Route path="/academia/aggregation/:classId" element={<Aggregation />} />
       <Route path="/academia/comments/:classId" element={<Comments />} />
       <Route path="/academia/attendance/:classId" element={<Attendance />} />
@@ -39,9 +45,10 @@ function App() {
       <Route path="/register/subject" element={<RegisterSubject />} />
 
       <Route path="/class" element={<Dashboard />} />
+      <Route path="/class/settings/:classId" element={<ClassSettings />} />
       <Route path="/class/students/:classId" element={<Students />} />
       <Route path="/class/requirements/:classId" element={<Requirements />} />
-      <Route path="/class/marksheet/:classId" element={<Marksheet />} />
+      <Route path="/class/marksheet/:classId" element={<ClassMarksheet />} />
 
     </Routes>
    </BrowserRouter>

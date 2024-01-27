@@ -74,16 +74,16 @@ export default function RegisterStaff() {
     };
 
     console.log(user);
-
+//
     return(
         <main className="flex">
         <Sidebar />
         <div className="w-full text-slate-900">
             <div className="w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto  bg-gradient-to-b from-purple-200 ring-1 rounded-md">
-                <form className=" mx-auto" onSubmit={e => handleSubmit(e)}>
+                <form className="w-1/2 mx-auto" onSubmit={e => handleSubmit(e)}>
                     <div className="font-[algerian] font-bold text-xl text-center">STAFF REGISTRATION</div>
                     <div className="font-light text-purple-700 text-center">{msg}</div>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="ring-1 ring-purple-700 p-2 rounded-md bg-gradient-to-br from-white via-blue-50 to-white">
                         <div className="mt-4 flex flex-col">
                             <label htmlFor="name">Name:</label>
                             <input className="inputstyle" type="text" name="name" placeholder="eg John Doe" value={user.name} onChange={e => handleInputChange(e)} accept="A-Z|a-z"/>
@@ -123,7 +123,7 @@ export default function RegisterStaff() {
                             <input className="inputstyle" type="file" name="picture" onChange={e => handleInputChange(e)}/>
                         </div>
                     </div>
-                    <div className="">
+                    <div className="ring-1 ring-purple-700 p-2 rounded-md mt-4 bg-gradient-to-br from-white via-blue-50 to-white">
                         <div className="mt-4 flex flex-col">
                             <label htmlFor="class_id">Classes taught by this teacher:</label>
                             <div className="grid grid-cols-2 gap-2">

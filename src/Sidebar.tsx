@@ -3,15 +3,18 @@ import logo from "./logo.png";
 import { useState } from "react";
 import { NavLink } from "./components/Interfaces";
 import { useAuth } from "./AuthContext";
+import Search from "./Search";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Sidebar(){
     const {authUser, unsetCurrentUser} = useAuth();
+    console.log(authUser)
     const imgUrl = process.env.REACT_APP_IMG_URL;
     const navigate = useNavigate();
     const links: NavLink[] = [
         {pathName: '/class', name: 'Dashboard'},  
         {pathName: '/marksheet', name: 'Marksheet', sublinks: 
-            authUser?.classes?.map(clas => ({pathName: '/marksheet/' + authUser?.class?.id, name: clas.name}))
+            authUser?.classes?.map(clas => ({pathName: '/marksheet/' + clas?.id + '/mid', name: clas.name}))
         },  
         {pathName: '/academia', name: 'Academia', sublinks: [
             {pathName: '/academia/aggregation/' + authUser?.class?.id, name: 'Aggregation'},
@@ -28,12 +31,13 @@ export default function Sidebar(){
         ]},  
     ]
     const links2: NavLink[] = [
-        {pathName: '#', name: 'Profile'},
+        {pathName: '/user/' + authUser?.id, name: 'Profile'},
     ]
 
     return(
-        <div className='bg-purple-500 min-h-screen p-4 w-60 border-x-slate-700 overscroll-contain min-w-[300px]'>
+        <div className='bg-purple-400 to-pink-500 min-h-screen p-4 w-60 border-x-slate-700 overscroll-contain min-w-[300px]'>
             <img src={authUser?.profile_pic_filepath === null ? logo : `${imgUrl}/${authUser?.profile_pic_filepath}`} className="rounded-full w-1/3 mx-auto mb-4" alt="logo" />
+                <div className="mb-4"><Search searchUrl={apiUrl + "/user/search/"} redirectUrl="/user/" pholder="Search Staff / Parent" /></div>
             <nav className="text-white rounded-md overscroll-contain sticky top-0 bg-black/20 p-3 min-h-[300px]">
                 <ul className="divide-y divide-gray-50">
                     <div className="">

@@ -1,15 +1,15 @@
 import { NavLink } from "../Interfaces";
 import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-
+/*
 const links: NavLink[] = [
     {pathName: '/class/students', name: 'Students'},  
     {pathName: '/class/marksheet', name: 'Marksheet'},  
     {pathName: '/class/requirements', name: 'Requirements'},  
 ]
-
-interface NavProps{classId?: string}
-export default function NavBar({classId}: NavProps){
+*/
+interface NavProps{classId?: string, links: NavLink[]}
+export default function NavBar({classId, links}: NavProps){
     return (
         <nav className="bg-purple-300 text-slate-500 text-lg">
             <ul className="flex p-1 justify-between">
