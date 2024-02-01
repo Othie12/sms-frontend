@@ -19,7 +19,6 @@ export default function Dashboard(){
     useEffect(() => {
         fetchClasses()
     }, []);
-
     return(
             <main className="flex">
                 <Sidebar />
@@ -39,15 +38,17 @@ interface ClassCardProps{
     c: SchoolClass;
 }
 function ClassCard({c}: ClassCardProps){
+    const girls = c.girls ? c.girls : 0;
+    const boys = c.boys ? c.boys : 0;
     return (
         <Link to={"/class/students/" + c.id}>
             <div className="gradient1 transition duration-300 rounded-lg p-4 hover:bg-purple-500 shadowstyle-1" key={c.id}>
                 <p className="font-bold bg-purple-300/30 p-2 rounded-lg text-gray-800">{c.name}</p>
                 <p className="font-light">{c.class_teacher?.name}</p>
-                <p className="text-purple-900">Girls: {c.girls}</p>
-                <p className="text-purple-900">Boys: {c.boys}</p>
-                <p className="font-medium">Total: {c.girls && c.boys && c.girls + c.boys}</p>
-                <p className="">Fees: {c.fees}</p>
+                <p className="text-purple-900">Girls: {girls}</p>
+                <p className="text-purple-900">Boys: {boys}</p>
+                <p className="font-medium">Total: {girls + boys}</p>
+                <p className="">Fees: Ugx,{c.fees && Math.round(c.fees)}</p>
             </div>
         </Link>
     );

@@ -18,6 +18,8 @@ import Marksheet from "./components/marksheet/marksheet";
 import StudentProfile from "./components/student/Profile";
 import UserProfile from "./components/user/Profile";
 import ClassSettings from "./components/class/Settings";
+import Reciept from "./components/Reciept";
+import ScanQr from "./components/Scan-Qr";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
       <Route path="/marksheet/:classId/:type/:classId?" element={<Marksheet />} />
 
       <Route path="/student/:id" element={<StudentProfile />} />
+      <Route path="/reciept/:id" element={<Reciept />} />
+      <Route path="/scan-qr" element={<ScanQr />} />
       <Route path="/user/:id" element={<UserProfile />} />
 
       <Route path="/academia" element={<Sidebar />} />

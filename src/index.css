@@ -36,6 +36,14 @@ code {
   }
 
   .shadowstyle-1 {
-    @apply shadow-[1px_1px_8px_rgba(00,00,05,0.8),-1px_-1px_6px_rgba(255,255,255,1)] p-3 rounded-md;
+    @apply shadow-[1px_1px_5px_rgba(00,00,05,1),-3px_-3px_6px_rgba(255,255,255,1)] p-2 rounded-md;
+  }
+
+  .error-msg {
+    @apply text-red-500 font-light;
+  }
+
+  .default-container {
+    @apply rounded-lg ring-purple-600 m-2 p-2 bg-purple-100 ring-1;
   }
 }

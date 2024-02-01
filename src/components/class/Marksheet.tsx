@@ -11,13 +11,13 @@ export default function ClassMarksheet(){
     const apiUrl = process.env.REACT_APP_API_URL;
     const {classId} = useParams();
 
-        //links on the top navbar
-        const links: NavLink[] = [
-            {pathName: '/class/students', name: 'Students'},  
-            {pathName: '/class/marksheet', name: 'Marksheet'},  
-            {pathName: '/class/requirements', name: 'Requirements'},  
-            {pathName: '/class/settings', name: 'Settings'},  
-        ]
+    //links on the top navbar
+    const links: NavLink[] = [
+        {pathName: '/class/students', name: 'Students'},  
+        {pathName: '/class/marksheet', name: 'Marksheet'},  
+        {pathName: '/class/requirements', name: 'Requirements'},  
+        {pathName: '/class/settings', name: 'Settings'},  
+    ]
     const fetchStudents = () => {
         axios.get(`${apiUrl}/class/students/${classId}`)
         .then(r => {

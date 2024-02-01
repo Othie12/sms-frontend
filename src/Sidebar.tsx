@@ -8,11 +8,11 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Sidebar(){
     const {authUser, unsetCurrentUser} = useAuth();
-    console.log(authUser)
     const imgUrl = process.env.REACT_APP_IMG_URL;
     const navigate = useNavigate();
     const links: NavLink[] = [
         {pathName: '/class', name: 'Dashboard'},  
+        {pathName: '/scan-qr', name: 'Scan receipt code'},
         {pathName: '/marksheet', name: 'Marksheet', sublinks: 
             authUser?.classes?.map(clas => ({pathName: '/marksheet/' + clas?.id + '/mid', name: clas.name}))
         },  
@@ -35,7 +35,7 @@ export default function Sidebar(){
     ]
 
     return(
-        <div className='bg-purple-400 to-pink-500 min-h-screen p-4 w-60 border-x-slate-700 overscroll-contain min-w-[300px]'>
+        <div className='print:hidden bg-purple-400 to-pink-500 min-h-screen p-4 w-60 border-x-slate-700 overscroll-contain min-w-[300px]'>
             <img src={authUser?.profile_pic_filepath === null ? logo : `${imgUrl}/${authUser?.profile_pic_filepath}`} className="rounded-full w-1/3 mx-auto mb-4" alt="logo" />
                 <div className="mb-4"><Search searchUrl={apiUrl + "/user/search/"} redirectUrl="/user/" pholder="Search Staff / Parent" /></div>
             <nav className="text-white rounded-md overscroll-contain sticky top-0 bg-black/20 p-3 min-h-[300px]">

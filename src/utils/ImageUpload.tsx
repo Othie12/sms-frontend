@@ -41,7 +41,7 @@ const CameraAvatarEditor: React.FC = () => {
 
   return (
     <div>
-      <button id='btn' className='rounded-md selectedinputstyle p-2 m-2 text-white' onClick={handleCapture}>Capture Photo</button>
+      <button id='btn' className='rounded-md selectedinputstyle p-2 text-white' onClick={handleCapture}>Capture Photo</button>
 
       {image && (
         <div>
