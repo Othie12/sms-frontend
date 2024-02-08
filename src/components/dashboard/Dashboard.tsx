@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../../Sidebar";
 import { SchoolClass } from "../Interfaces";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Search from "../../Search";
+import Template from "../Template";
 
-export default function Dashboard(){
+export default function Dashboard() {
+    return(
+        <Template children={<Page />} />
+    ); 
+}
+
+function Page(){
     const apiUrl = process.env.REACT_APP_API_URL;
     const [classes, SetClasses] = useState<SchoolClass[]>([]);
 
@@ -20,17 +26,15 @@ export default function Dashboard(){
         fetchClasses()
     }, []);
     return(
-            <main className="flex">
-                <Sidebar />
-                    <div className="w-full">
-                        <div className="flex justify-center mt-2">
-                            <Search searchUrl={apiUrl + "/student/search/"} redirectUrl={'/student/'} pholder="Search Pupil" />
-                        </div>
-                        <div className="grid grid-cols-3 gap-4 p-4">
-                            {classes.map(clas => <ClassCard c={clas} key={clas.id} />)}
-                        </div>
-                    </div>
-            </main>
+        <div>
+            <div className="flex justify-center mt-2">
+                <Search searchUrl={apiUrl + "/student/search/"} redirectUrl={'/student/'} pholder="Search Pupil" />
+            </div>
+            <div className="grid md:lg:grid-cols-3 gap-4 p-4">
+                {classes.map(clas => <ClassCard c={clas} key={clas.id} />)}
+            </div>
+        </div>
+
     );
 }
 
@@ -48,7 +52,11 @@ function ClassCard({c}: ClassCardProps){
                 <p className="text-purple-900">Girls: {girls}</p>
                 <p className="text-purple-900">Boys: {boys}</p>
                 <p className="font-medium">Total: {girls + boys}</p>
-                <p className="">Fees: Ugx,{c.fees && Math.round(c.fees)}</p>
+                <p className="">
+                    Fees: 
+                    Ugx,{c.fees_day && Math.round(c.fees_day)} -
+                    Ugx,{c.fees_boarding && Math.round(c.fees_boarding)}
+                </p>
             </div>
         </Link>
     );

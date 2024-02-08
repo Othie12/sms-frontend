@@ -42,8 +42,6 @@ function App() {
 
       <Route path="/register" element={<Sidebar />} />
       <Route path="/register/student" element={<RegisterStudent />} />
-      <Route path="/register/parent" element={<RegisterParent />} />
-      <Route path="/register/requirement" element={<RegisterRequirement />} />
       <Route path="/register/staff" element={<RegisterStaff />} />
       <Route path="/register/staff" element={<RegisterStaff />} />
       <Route path="/register/subject" element={<RegisterSubject />} />

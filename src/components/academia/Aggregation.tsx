@@ -3,9 +3,14 @@ import { Grading } from "../Interfaces";
 import axios from "axios";
 import Sidebar from "../../Sidebar";
 import { useParams } from "react-router-dom";
+import Template from "../Template";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Aggregation(){
+    return(<Template children={<Page />} />)
+}
+
+function Page(){
     const [gradings, setGradings] = useState<Grading[]>();
     const [updated, setUpdated] = useState<boolean>(true)
     const {classId} = useParams();
@@ -23,9 +28,7 @@ export default function Aggregation(){
     
     console.log(gradings)
     return(
-        <main className="flex">
-        <Sidebar />
-            <div className="w-full">
+            <div className="">
                 <div className="rounded-lg w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
                     <table className="w-full">
                         <thead className="sticky top-0">
@@ -47,7 +50,6 @@ export default function Aggregation(){
                     </table>
                 </div>
             </div>
-    </main>
     );
 }
 
@@ -86,7 +88,7 @@ function CreateNew(p: CreateProps){
                     <input type="number" className="ring-1 rounded-md ring-slate-500 pl-2" name="marks_from" min={0} max={100} required placeholder="from" value={grading?.marks_from} onChange={e => handleInputChange(e)}/> - <input type="number" name="marks_to" min={0} max={100} required className="ring-1 rounded-md ring-slate-500 pl-2" placeholder="to" value={grading?.marks_to} onChange={e => handleInputChange(e)}/>
                 </td>
                 <td>
-                    <select name="grade" required className="ring-1 rounded-md ring-slate-500 px-2 p-1" value={grading?.grade} onChange={e => handleInputChange(e)}>
+                    <select name="grade" required className="inputstyle w-1/2" value={grading?.grade} onChange={e => handleInputChange(e)}>
                         <option>--select--</option>
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -99,7 +101,7 @@ function CreateNew(p: CreateProps){
                         <option value={9}>9</option>
                     </select>    
                 </td>
-                <td><input type="text" name="remark" className="ring-1 pl-2 rounded-md ring-slate-500" value={grading?.remark} onChange={e => handleInputChange(e)}/></td>
+                <td><input type="text" name="remark" className="inputstyle w-1/2" value={grading?.remark} onChange={e => handleInputChange(e)}/></td>
                 <td><input type="submit" name="submit" value={"Submit"} className="ring-1 p-1 bg-purple-200 ring-slate-500 hover:bg-purple-400 rounded-md" onClick={() => handleSubmit()}/></td>
         </tr>
     );

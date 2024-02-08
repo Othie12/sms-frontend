@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import Sidebar from "../../Sidebar"
+import { useState } from "react";
 import { AutoCapitalize, Parent } from "../Interfaces";
 import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -35,14 +34,9 @@ export default function RegisterParent() {
         setParent({...parent, [name]: value});
     };
 
-    console.log(parent);
-
     return(
-        <main className="flex">
-        <Sidebar />
-        <div className="w-full text-slate-900">
             <div className="w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto  bg-gradient-to-b from-purple-200 ring-1 rounded-md">
-                <form className="w-1/2 mx-auto" onSubmit={e => handleSubmit(e)}>
+                <form className="md:lg:w-1/2 mx-auto" onSubmit={e => handleSubmit(e)}>
                     <div className="font-[algerian] font-bold text-xl text-center">PARENT REGISTRATION</div>
                     <div className="font-light text-purple-700 text-center">{msg}</div>
                         <div className="mt-4 flex flex-col">
@@ -75,7 +69,5 @@ export default function RegisterParent() {
                     <input type="submit" name="submit" value='Register' className="inputstyle bg-purple-700 ring-1 ring-purple-700 mt-4 text-white" />
                 </form>
             </div>
-        </div>
-    </main>
     )
 }

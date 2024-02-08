@@ -2,10 +2,15 @@ import { useEffect, useState } from "react"
 import Sidebar from "../../Sidebar"
 import { AutoCapitalize, Parent, SchoolClass, Student,  } from "../Interfaces"
 import axios from "axios";
+import Template from "../Template";
+import RegisterParent from "./Parent";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function RegisterStudent() {
+    return(<Template children={<Page />} />);
+}
+function Page() {
     const [student, setStudent] = useState<Student>({name: ''});
     const [classes, setClasses] = useState<SchoolClass[]>([]);
     const [msg, setMsg] = useState<string>('');
@@ -49,13 +54,14 @@ export default function RegisterStudent() {
     console.log(student)
 
     return(
-        <main className="flex">
-            <Sidebar />
-            <div className="w-full text-slate-900">
-                <div className="w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1 rounded-md">
+                <div className="mt-2 p-2">
                     <form className="md:lg:w-1/2 mx-auto" onSubmit={e => handleSubmit(e)}>
                         <div className="font-[algerian] font-bold text-xl text-center">STUDENT REGISTRATION</div>
                         <div className="font-light text-purple-700 text-center">{msg}</div>
+                        <p className="error-msg" >
+                            If parent info is available, please first register the
+                            parent and then the student
+                        </p>
                         <div className="mt-4 flex flex-col">
                             <label htmlFor="name">Name:</label>
                             <input className="inputstyle" type="text" name="name" placeholder="eg John Doe" value={student.name} onChange={e => handleInputChange(e)} accept="A-Z|a-z"/>
@@ -64,8 +70,16 @@ export default function RegisterStudent() {
                         <div className="mt-4">
                             <label htmlFor="sex">Sex:</label>
                             <div className="flex">
-                                <input type="radio" name="sex" value="m" className="rounded-md" onClick={() => setStudent({...student, sex: 'M'})}/> Male
-                                <input type="radio" name="sex" value="f" className="rounded-md ml-4" onClick={() => setStudent({...student, sex: 'F'})}/> Female
+                                <input type="radio" name="sex" value="m" className="rounded-md" onClick={() => setStudent({...student, sex: 'm'})}/> Male
+                                <input type="radio" name="sex" value="f" className="rounded-md ml-4" onClick={() => setStudent({...student, sex: 'f'})}/> Female
+                            </div>
+                        </div>
+
+                        <div className="mt-4">
+                            <label htmlFor="section">Section:</label>
+                            <div className="flex">
+                                <input type="radio" name="section" value="Boarding" className="rounded-md" onClick={() => setStudent({...student, section: 'Boarding'})}/> Boarding
+                                <input type="radio" name="section" value="Day" className="rounded-md ml-4" onClick={() => setStudent({...student, section: 'Day'})}/> Day
                             </div>
                         </div>
 
@@ -80,6 +94,8 @@ export default function RegisterStudent() {
                         </div>
 
                         <div className="mt-4 flex flex-col">
+                            <p className="error-msg" >If the parent already exists, please
+                            don't register him/her again. Just search here</p>
                             <label htmlFor="parent_id">Parent:</label>
                             <SearchInput name="parent_id" searchUrl={`${apiUrl}/parent/search/`} stdnt={student} setter={setStudent} />
                         </div>
@@ -96,9 +112,9 @@ export default function RegisterStudent() {
 
                         <input type="submit" name="submit" value='Register' className="inputstyle bg-purple-700 ring-1 ring-purple-700 mt-4 text-white" />
                     </form>
+
+                    <RegisterParent />
                 </div>
-            </div>
-        </main>
     )
 }
 

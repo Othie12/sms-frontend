@@ -1,14 +1,37 @@
 import { NavLink } from "../Interfaces";
 import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-/*
+import Template from "../Template";
+import { ReactNode } from "react";
+//links on the top navbar
 const links: NavLink[] = [
     {pathName: '/class/students', name: 'Students'},  
     {pathName: '/class/marksheet', name: 'Marksheet'},  
     {pathName: '/class/requirements', name: 'Requirements'},  
+    {pathName: '/class/settings', name: 'Settings'},  
 ]
-*/
-interface NavProps{classId?: string, links: NavLink[]}
+interface NavProps{classId?: string, links?: NavLink[], chilren: ReactNode}
+
+export default function NavBar({classId, chilren}: NavProps){
+    return (<Template children={<Page classId={classId} chilren={chilren}/>} />)
+}
+
+function Page({classId, chilren}: NavProps){
+    return (
+        <div>
+        <nav className="bg-purple-300 text-slate-500 text-lg">
+            <ul className="flex p-1 justify-between">
+                {links.map(l => 
+                    <li><LinkItem l={l} id={classId}/></li>    
+                )}
+            </ul>
+        </nav>
+            {chilren}
+        </div>
+    );
+}
+
+/*
 export default function NavBar({classId, links}: NavProps){
     return (
         <nav className="bg-purple-300 text-slate-500 text-lg">
@@ -20,14 +43,14 @@ export default function NavBar({classId, links}: NavProps){
         </nav>
     );
 }
-
+*/
 
 
 interface linkProps {
     l: NavLink
     id?: string
 }
-function LinkItem({l, id}: linkProps){
+export function LinkItem({l, id}: linkProps){
     const right = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                     </svg>

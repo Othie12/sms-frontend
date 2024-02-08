@@ -6,8 +6,17 @@ import { useAuth } from "./AuthContext";
 import Search from "./Search";
 const apiUrl = process.env.REACT_APP_API_URL;
 
+//media query in javascript to handle sidebar collapse on different screens
+const phoneWindowSize = window.matchMedia("(max-width: 700px)");
+
+const bars_icon = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+
+
 export default function Sidebar(){
     const {authUser, unsetCurrentUser} = useAuth();
+    const [hidden, setHidden] = useState(phoneWindowSize.matches);
     const imgUrl = process.env.REACT_APP_IMG_URL;
     const navigate = useNavigate();
     const links: NavLink[] = [
@@ -26,8 +35,6 @@ export default function Sidebar(){
             {pathName: '/register/staff', name: 'Staff'},
             {pathName: '/register/student', name: 'Student'},
             {pathName: '/register/subject', name: 'Subject'},
-            {pathName: '/register/parent', name: 'Parent'},
-            {pathName: '/register/requirement', name: 'Requirement'},
         ]},  
     ]
     const links2: NavLink[] = [
@@ -35,10 +42,19 @@ export default function Sidebar(){
     ]
 
     return(
-        <div className='print:hidden bg-purple-400 to-pink-500 min-h-screen p-4 w-60 border-x-slate-700 overscroll-contain min-w-[300px]'>
-            <img src={authUser?.profile_pic_filepath === null ? logo : `${imgUrl}/${authUser?.profile_pic_filepath}`} className="rounded-full w-1/3 mx-auto mb-4" alt="logo" />
-                <div className="mb-4"><Search searchUrl={apiUrl + "/user/search/"} redirectUrl="/user/" pholder="Search Staff / Parent" /></div>
-            <nav className="text-white rounded-md overscroll-contain sticky top-0 bg-black/20 p-3 min-h-[300px]">
+        <div className='print:hidden bg-purple-400 to-pink-500 
+                        md:lg:min-h-screen p-4 w-full md:lg:w-60 
+                        border-x-slate-700 overscroll-contain min-w-[300px]
+                        sticky top-0
+        '>
+            {phoneWindowSize.matches &&
+            <button onClick={() => setHidden(!hidden)} className="-ml-0">
+                {bars_icon}
+            </button>
+            }
+            <img  hidden={hidden} src={authUser?.profile_pic_filepath === null ? logo : `${imgUrl}/${authUser?.profile_pic_filepath}`} className="rounded-full w-1/3 mx-auto mb-4" alt="logo" />
+                <div hidden={hidden} className="mb-4"><Search searchUrl={apiUrl + "/user/search/"} redirectUrl="/user/" pholder="Search Staff / Parent" /></div>
+            <nav hidden={hidden} className="text-white rounded-md overscroll-contain sticky top-0 bg-black/20 p-3 min-h-[300px]">
                 <ul className="divide-y divide-gray-50">
                     <div className="">
                         {links.map(li => 

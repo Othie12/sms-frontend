@@ -6,7 +6,8 @@ export interface SchoolClass{
     class_teacher?: User;
     girls?: number;
     boys?: number;
-    fees?: number;
+    fees_day?: number;
+    fees_boarding?: number;
     subjects?: Subject[];
 }
 
@@ -41,6 +42,7 @@ export interface Student{
     profile_pic_filepath?: string
     picture?: File;
     parent_id?: string
+    section?: 'Day' | 'Boarding';
     class_id?: string
     custom_ct_comm?: string
     custom_ht_comm?: string

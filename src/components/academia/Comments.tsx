@@ -3,9 +3,13 @@ import { Comment } from "../Interfaces";
 import axios from "axios";
 import Sidebar from "../../Sidebar";
 import { useParams } from "react-router-dom";
+import Template from "../Template";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function Comments(){
+    return(<Template children={<Page />} />);
+}
+function Page(){
     const [comments, setComments] = useState<Comment[]>();
     const [updated, setUpdated] = useState<boolean>(true)
     const {classId} = useParams();
@@ -21,31 +25,25 @@ export default function Comments(){
         fetchAggs();
     }, [updated]);
     
-    console.log(comments)
     return(
-        <main className="flex">
-            <Sidebar />
-            <div className="w-full">
-                <div className="rounded-lg w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
-                    <table className="w-full">
-                        <thead className="sticky top-0">
-                            <tr className="backdrop-blur-md text-left bg-purple-300/50">
-                                <th className="p-3">Total</th>
-                                <th>Class Teacher</th>
-                                <th>Head Teacher</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {comments?.map(comment => 
-                            <DataRow setUpdated={setUpdated} updated={updated} comment={comment} />
-                        )}
-                        <CreateNew setUpdated={setUpdated} updated={updated} classId={classId}/>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
+        <div className="rounded-lg w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
+            <table className="w-full">
+                <thead className="sticky top-0">
+                    <tr className="backdrop-blur-md text-left bg-purple-300/50">
+                        <th className="p-3">Total</th>
+                        <th>Class Teacher</th>
+                        <th>Head Teacher</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {comments?.map(comment => 
+                    <DataRow setUpdated={setUpdated} updated={updated} comment={comment} />
+                )}
+                <CreateNew setUpdated={setUpdated} updated={updated} classId={classId}/>
+                </tbody>
+            </table>
+        </div>
     );
 }
 
@@ -80,7 +78,7 @@ function CreateNew(p: CreateProps){
         setComment({...comment, [name]: value,});
     };
     return (
-        <tr className="border-b-2 border-purple-400 hover:bg-purple-300">
+        <tr className="border-b-2 border-purple-400 hover:bg-purple-300 overflow-scroll">
                 <td className="p-2 flex">
                     <input type="number" className="ring-1 w-10 rounded-md ring-slate-500 pl-2" name="agg_from" min={0} required placeholder="from" value={comment?.agg_from} onChange={e => handleInputChange(e)}/> - <input type="number" name="agg_to" min={0} required className="ring-1 rounded-md w-10 ring-slate-500 pl-2" placeholder="to" value={comment?.agg_to} onChange={e => handleInputChange(e)}/>
                 </td>

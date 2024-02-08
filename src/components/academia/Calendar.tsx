@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import { Period } from "../Interfaces";
 import axios from "axios";
-import Sidebar from "../../Sidebar";
+import Template from "../Template";
 const apiUrl = process.env.REACT_APP_API_URL;
 
+
 export default function Calendar(){
+    return(<Template children={<Page />} />);
+}
+function Page(){
     return (
-        <main className="flex">
-            <Sidebar />
-            <section className="w-full">
-                <div className="rounded-lg w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
-                    <div onSubmit={e => e.preventDefault()} className="md:lg:w-1/2 mx-auto text-slate-600 mb-4">
-                        <FormItem name="First term"/>
-                        <FormItem name="Second term" />
-                        <FormItem name="Third term"/>
-                    </div>
-                </div>
-            </section>
-        </main>
+        <div className="rounded-lg w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto bg-purple-100 ring-1">
+            <div onSubmit={e => e.preventDefault()} className="md:lg:w-1/2 mx-auto text-slate-600 mb-4">
+                <FormItem name="First term"/>
+                <FormItem name="Second term" />
+                <FormItem name="Third term"/>
+            </div>
+        </div>
     )
 }
 

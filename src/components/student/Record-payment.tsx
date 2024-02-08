@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Payment, Student } from "../Interfaces";
 import axios from "axios";
 const apiUrl = process.env.REACT_APP_API_URL;
 
 interface paymentProps{
     student: Student;
+    repull: boolean;
+    setRepull: any;
 }
 export default function RecordPayment(p: paymentProps){
     const [payment, setPayment] = useState<Payment>({});
@@ -23,7 +25,8 @@ export default function RecordPayment(p: paymentProps){
             console.log(r);
             setPayment({});
             setMsg('recorded Succesfuly');
-            window.location.reload();
+            setFormHidden('hidden');
+            p.setRepull(!p.repull);
         }).catch(e => {
             const errors = Object.values(e.response.data.errors).join('\n');
             console.error(e);
@@ -61,8 +64,8 @@ export default function RecordPayment(p: paymentProps){
                 </div>
 
                 <div className="mt-4 flex flex-col" >
-                    <label htmlFor="payment_method">Payment method</label>
-                    <select className="inputstyle" name='payment_method'>
+                    <label htmlFor="payement_method">Payment method</label>
+                    <select className="inputstyle" name='payement_method'>
                         <option value="Cash">Cash</option>
                         <option value="Bank">Bank</option>
                         <option value="Mobile Money">Mobile Money</option>
