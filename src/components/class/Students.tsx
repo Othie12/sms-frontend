@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Student, NavLink, imgPlaceholder } from "../Interfaces";
+import { Student, imgPlaceholder } from "../Interfaces";
 import axios from "axios";
-import Sidebar from "../../Sidebar";
 import NavBar from "../dashboard/NavBar";
 import { useParams, Link } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
 
 export default function Students(){
     const {classId} = useParams();
@@ -15,14 +15,6 @@ function Page(){
     const apiUrl = process.env.REACT_APP_API_URL;
     const imgUrl = process.env.REACT_APP_IMG_URL;
     const {classId} = useParams();
-
-    //links on the top navbar
-    const links: NavLink[] = [
-        {pathName: '/class/students', name: 'Students'},  
-        {pathName: '/class/marksheet', name: 'Marksheet'},  
-        {pathName: '/class/requirements', name: 'Requirements'},  
-        {pathName: '/class/settings', name: 'Settings'},  
-    ]
     
     const fetchStudents = () => {
         axios.get(`${apiUrl}/class/students/${classId}`)

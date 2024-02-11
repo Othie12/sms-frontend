@@ -3,13 +3,8 @@ import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import Template from "../Template";
 import { ReactNode } from "react";
-//links on the top navbar
-const links: NavLink[] = [
-    {pathName: '/class/students', name: 'Students'},  
-    {pathName: '/class/marksheet', name: 'Marksheet'},  
-    {pathName: '/class/requirements', name: 'Requirements'},  
-    {pathName: '/class/settings', name: 'Settings'},  
-]
+import { useAuth } from "../../AuthContext";
+
 interface NavProps{classId?: string, links?: NavLink[], chilren: ReactNode}
 
 export default function NavBar({classId, chilren}: NavProps){
@@ -17,11 +12,21 @@ export default function NavBar({classId, chilren}: NavProps){
 }
 
 function Page({classId, chilren}: NavProps){
+    const {authUser} = useAuth();
+    
+    //links on the top navbar
+    const links: NavLink[] = [
+        {pathName: '/class/students', name: 'Students', condition: true},  
+        {pathName: '/class/marksheet', name: 'Marksheet', condition: true},  
+        {pathName: '/class/requirements', name: 'Requirements', condition: true},  
+        {pathName: '/class/settings', name: 'Settings', condition: authUser?.class !== undefined},  
+    ];
+
     return (
         <div>
         <nav className="bg-purple-300 text-slate-500 text-lg">
             <ul className="flex p-1 justify-between">
-                {links.map(l => 
+                {links.map(l => l.condition &&
                     <li><LinkItem l={l} id={classId}/></li>    
                 )}
             </ul>

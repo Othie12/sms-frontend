@@ -4,6 +4,7 @@ import { AutoCapitalize, SchoolClass, Subject, User, imgPlaceholder } from "../I
 import axios from "axios";
 import { useAuth } from "../../AuthContext";
 import Template from "../Template";
+import { register_staff } from "../../Permissions";
 const apiUrl = process.env.REACT_APP_API_URL;
 const imgUrl = process.env.REACT_APP_IMG_URL;
 
@@ -24,6 +25,10 @@ function Page(){
             setUser(r.data);
         }).catch(e => console.error(e));
     }, [id]);
+
+    if(!authUser?.role){
+        return(<div>Please Login first</div>)
+    }
 
     return(
             <div className="">
@@ -56,7 +61,7 @@ function Page(){
                         </div>
                     </div>
                 }
-                {user.id && user.role !== 'parent' &&
+                {user.id && user.role !== 'parent' && register_staff.includes(authUser.role) &&
                     <ClassDiv passedObjects={user.classes} userId={user.id} objectType="classes"/>
                 }
                 {user.subjects && user.subjects.length > 0 && 
@@ -69,7 +74,7 @@ function Page(){
                         </div>
                     </div>
                 }
-                {user.id && user.role !== 'parent' &&
+                {user.id && user.role !== 'parent' && register_staff.includes(authUser.role) &&
                     <ClassDiv passedObjects={user.subjects} userId={user.id} objectType="subjects"/>
                 }
                 </div>

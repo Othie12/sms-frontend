@@ -82,7 +82,7 @@ function Page() {
 //
     return(
         <div className=" mt-2 p-2 mx-auto">
-            <form className="w-full md:lg:w-1/2 mx-auto" onSubmit={e => handleSubmit(e)}>
+            <form className="w-full md:lg:w-3/4 mx-auto" onSubmit={e => handleSubmit(e)}>
                 <div className="font-[algerian] font-bold text-xl text-center">STAFF REGISTRATION</div>
                 <div className="font-light text-purple-700 text-center">{msg}</div>
                 <div className="ring-1 ring-purple-700 p-2 rounded-md bg-gradient-to-br from-white via-blue-50 to-white">
@@ -104,11 +104,12 @@ function Page() {
                     <div className="mt-4 flex flex-col">
                         <label htmlFor="role">Role:</label>
                         <select name="role" className="inputstyle" onChange={e => handleInputChange(e)} value={user.role}>
-                            <option value="teacher">Teacher</option>
-                            <option value="head_teacher">Head Teacher</option>
-                            <option value="dos">D.O.S</option>
-                            <option value="sectretary">Secretary</option>
-                            <option value="other">Other</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Head Teacher">Head Teacher</option>
+                            <option value="Deputy Head Teacher">Deputy Head Teacher</option>
+                            <option value="DOS">D.O.S</option>
+                            <option value="Sectretary">Secretary</option>
+                            <option value="Bursar">Bursar</option>
                         </select>
                     </div>
 

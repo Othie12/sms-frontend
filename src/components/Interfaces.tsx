@@ -39,6 +39,8 @@ export interface Student{
     name: string
     sex?: string
     dob?: string
+    doj?: string
+    dol?: string
     profile_pic_filepath?: string
     picture?: File;
     parent_id?: string
@@ -53,6 +55,7 @@ export interface Student{
     marks?: Mark[];
     periods?: Period[];
     payments?: Payment[];
+    balance_objs?: Balance[];
     attendance?: string[];
     balance?: string;
 }
@@ -158,6 +161,7 @@ export interface NavLink {
     pathName: string;
     name: string;
     sublinks?: Array<NavLink>;
+    condition?: boolean;
 }
 
 export const AutoCapitalize = (word: string) => {

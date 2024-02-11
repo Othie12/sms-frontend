@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import Sidebar from "../../Sidebar"
 import { AutoCapitalize, Parent, SchoolClass, Student,  } from "../Interfaces"
 import axios from "axios";
 import Template from "../Template";
@@ -54,67 +53,72 @@ function Page() {
     console.log(student)
 
     return(
-                <div className="mt-2 p-2">
-                    <form className="md:lg:w-1/2 mx-auto" onSubmit={e => handleSubmit(e)}>
-                        <div className="font-[algerian] font-bold text-xl text-center">STUDENT REGISTRATION</div>
-                        <div className="font-light text-purple-700 text-center">{msg}</div>
-                        <p className="error-msg" >
-                            If parent info is available, please first register the
-                            parent and then the student
-                        </p>
-                        <div className="mt-4 flex flex-col">
-                            <label htmlFor="name">Name:</label>
-                            <input className="inputstyle" type="text" name="name" placeholder="eg John Doe" value={student.name} onChange={e => handleInputChange(e)} accept="A-Z|a-z"/>
-                        </div>
-
-                        <div className="mt-4">
-                            <label htmlFor="sex">Sex:</label>
-                            <div className="flex">
-                                <input type="radio" name="sex" value="m" className="rounded-md" onClick={() => setStudent({...student, sex: 'm'})}/> Male
-                                <input type="radio" name="sex" value="f" className="rounded-md ml-4" onClick={() => setStudent({...student, sex: 'f'})}/> Female
-                            </div>
-                        </div>
-
-                        <div className="mt-4">
-                            <label htmlFor="section">Section:</label>
-                            <div className="flex">
-                                <input type="radio" name="section" value="Boarding" className="rounded-md" onClick={() => setStudent({...student, section: 'Boarding'})}/> Boarding
-                                <input type="radio" name="section" value="Day" className="rounded-md ml-4" onClick={() => setStudent({...student, section: 'Day'})}/> Day
-                            </div>
-                        </div>
-
-                        <div className="mt-4 flex flex-col">
-                            <label htmlFor="picture">Picture:</label>
-                            <input className="inputstyle" type="file" name="picture" onChange={e => handleInputChange(e)}/>
-                        </div>
-
-                        <div className="mt-4 flex flex-col">
-                            <label htmlFor="dob">D.O.B:</label>
-                            <input className="inputstyle" type="date" aria-controls="true" name="dob" onChange={e => handleInputChange(e)} value={student.dob} />
-                        </div>
-
-                        <div className="mt-4 flex flex-col">
-                            <p className="error-msg" >If the parent already exists, please
-                            don't register him/her again. Just search here</p>
-                            <label htmlFor="parent_id">Parent:</label>
-                            <SearchInput name="parent_id" searchUrl={`${apiUrl}/parent/search/`} stdnt={student} setter={setStudent} />
-                        </div>
-
-                        <div className="mt-4 flex flex-col">
-                            <label htmlFor="class_id">Class:</label>
-                            <select className="inputstyle" name="class_id" onChange={e => handleInputChange(e)}>
-                                <option value=''>--select--</option>
-                                {classes.map(schoolClass => 
-                                    <option value={schoolClass.id}>{schoolClass.name}</option>    
-                                )}
-                            </select>
-                        </div>
-
-                        <input type="submit" name="submit" value='Register' className="inputstyle bg-purple-700 ring-1 ring-purple-700 mt-4 text-white" />
-                    </form>
-
-                    <RegisterParent />
+        <div className="mt-2 p-2">
+            <form className="md:lg:w-3/4 mx-auto" onSubmit={e => handleSubmit(e)}>
+                <div className="font-[algerian] font-bold text-xl text-center">STUDENT REGISTRATION</div>
+                <div className="font-light text-purple-700 text-center">{msg}</div>
+                <p className="error-msg" >
+                    If parent info is available, please first register the
+                    parent and then the student
+                </p>
+                <div className="mt-4 flex flex-col">
+                    <label htmlFor="name">Name:</label>
+                    <input className="inputstyle" type="text" name="name" placeholder="eg John Doe" value={student.name} onChange={e => handleInputChange(e)} accept="A-Z|a-z"/>
                 </div>
+
+                <div className="mt-4">
+                    <label htmlFor="sex">Sex:</label>
+                    <div className="flex">
+                        <input type="radio" name="sex" value="m" className="rounded-md" onClick={() => setStudent({...student, sex: 'm'})}/> Male
+                        <input type="radio" name="sex" value="f" className="rounded-md ml-4" onClick={() => setStudent({...student, sex: 'f'})}/> Female
+                    </div>
+                </div>
+
+                <div className="mt-4">
+                    <label htmlFor="section">Section:</label>
+                    <div className="flex">
+                        <input type="radio" name="section" value="Boarding" className="rounded-md" onClick={() => setStudent({...student, section: 'Boarding'})}/> Boarding
+                        <input type="radio" name="section" value="Day" className="rounded-md ml-4" onClick={() => setStudent({...student, section: 'Day'})}/> Day
+                    </div>
+                </div>
+
+                <div className="mt-4 flex flex-col">
+                    <label htmlFor="picture">Picture:</label>
+                    <input className="inputstyle" type="file" name="picture" onChange={e => handleInputChange(e)}/>
+                </div>
+
+                <div className="mt-4 flex flex-col">
+                    <label htmlFor="dob">D.O.B:</label>
+                    <input className="inputstyle" type="date" name="dob" onChange={e => handleInputChange(e)} value={student.dob} />
+                </div>
+
+                <div className="mt-4 flex flex-col">
+                    <label htmlFor="dob">Date of Joining</label>
+                    <input className="inputstyle" type="date" name="doj" onChange={e => handleInputChange(e)} value={student.doj} />
+                </div>
+
+                <div className="mt-4 flex flex-col">
+                    <p className="error-msg" >If the parent already exists, please
+                    don't register him/her again. Just search here</p>
+                    <label htmlFor="parent_id">Parent:</label>
+                    <SearchInput name="parent_id" searchUrl={`${apiUrl}/parent/search/`} stdnt={student} setter={setStudent} />
+                </div>
+
+                <div className="mt-4 flex flex-col">
+                    <label htmlFor="class_id">Class:</label>
+                    <select className="inputstyle" name="class_id" onChange={e => handleInputChange(e)}>
+                        <option value=''>--select--</option>
+                        {classes.map(schoolClass => 
+                            <option value={schoolClass.id}>{schoolClass.name}</option>    
+                        )}
+                    </select>
+                </div>
+
+                <input type="submit" name="submit" value='Register' className="inputstyle bg-purple-700 ring-1 ring-purple-700 mt-4 text-white" />
+            </form>
+
+            <RegisterParent />
+        </div>
     )
 }
 

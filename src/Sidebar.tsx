@@ -4,7 +4,9 @@ import { useState } from "react";
 import { NavLink } from "./components/Interfaces";
 import { useAuth } from "./AuthContext";
 import Search from "./Search";
+import { create_calendar, permitted_everywhere, record_payment, register_staff, register_student } from "./Permissions";
 const apiUrl = process.env.REACT_APP_API_URL;
+
 
 //media query in javascript to handle sidebar collapse on different screens
 const phoneWindowSize = window.matchMedia("(max-width: 700px)");
@@ -19,24 +21,30 @@ export default function Sidebar(){
     const [hidden, setHidden] = useState(phoneWindowSize.matches);
     const imgUrl = process.env.REACT_APP_IMG_URL;
     const navigate = useNavigate();
+    
+    if(!authUser?.role){
+        return(<div>Please Login first</div>)
+    }
+
     const links: NavLink[] = [
-        {pathName: '/class', name: 'Dashboard'},  
-        {pathName: '/scan-qr', name: 'Scan receipt code'},
+        {pathName: '/class', name: 'Dashboard', condition: true},  
+        {pathName: '/scan-qr', name: 'Scan receipt code', condition: record_payment.includes(authUser.role)},
         {pathName: '/marksheet', name: 'Marksheet', sublinks: 
             authUser?.classes?.map(clas => ({pathName: '/marksheet/' + clas?.id + '/mid', name: clas.name}))
-        },  
+        , condition: authUser.classes && authUser.classes?.length > 0},  
         {pathName: '/academia', name: 'Academia', sublinks: [
-            {pathName: '/academia/aggregation/' + authUser?.class?.id, name: 'Aggregation'},
-            {pathName: '/academia/comments/' + authUser?.class?.id, name: 'Comments'},
-            {pathName: '/academia/attendance/' + authUser?.class?.id, name: 'Attendance'},
-            {pathName: '/academia/calendar', name: 'Calendar'},
-        ]},  
+            {pathName: '/academia/aggregation/' + authUser?.class?.id, name: 'Aggregation', condition: authUser.class !== undefined },
+            {pathName: '/academia/comments/' + authUser?.class?.id, name: 'Comments', condition: authUser.class !== undefined || permitted_everywhere.includes(authUser.role)},
+            {pathName: '/academia/attendance/' + authUser?.class?.id, name: 'Attendance', condition: authUser.class !== undefined},
+            {pathName: '/academia/calendar', name: 'Calendar', condition: create_calendar.includes(authUser.role)},
+        ], condition: true},  
         {pathName: '/register', name: 'register', sublinks: [
-            {pathName: '/register/staff', name: 'Staff'},
-            {pathName: '/register/student', name: 'Student'},
-            {pathName: '/register/subject', name: 'Subject'},
-        ]},  
+            {pathName: '/register/staff', name: 'Staff', condition: register_staff.includes(authUser.role)},
+            {pathName: '/register/student', name: 'Student', condition: register_student.includes(authUser.role)},
+            {pathName: '/register/subject', name: 'Subject', condition: register_staff.includes(authUser.role)},
+        ], condition: true},  
     ]
+
     const links2: NavLink[] = [
         {pathName: '/user/' + authUser?.id, name: 'Profile'},
     ]
@@ -57,7 +65,7 @@ export default function Sidebar(){
             <nav hidden={hidden} className="text-white rounded-md overscroll-contain sticky top-0 bg-black/20 p-3 min-h-[300px]">
                 <ul className="divide-y divide-gray-50">
                     <div className="">
-                        {links.map(li => 
+                        {links.map(li => li.condition &&
                             <LinkItem l={li} key={li.name}/>
                         )}
                     </div>
@@ -102,7 +110,7 @@ function LinkItem({l}: linkProps){
                         {caret}
                     </span>
                 <ul className={`ml-4 w-full font-light ${hidden}`}>
-                    {l.sublinks.map(sl => 
+                    {l.sublinks.map(sl => sl.condition &&
                         <li className="w-full" key={sl.name}>
                             <Link className="hover:bg-slate-200/20 rounded-md px-3 w-full p-2" to={sl.pathName}>{sl.name}</Link>
                         </li>

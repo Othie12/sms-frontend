@@ -62,7 +62,7 @@ function Page() {
 
     return(
         <div className="w-[98%] min-h-[97%] ring-purple-600 mt-2 p-2 mx-auto  bg-gradient-to-b from-purple-200 ring-1 rounded-md">
-            <form className="md:lg:w-1/2 mx-auto" onSubmit={e => handleSubmit(e)}>
+            <form className="md:lg:w-3/4 mx-auto" onSubmit={e => handleSubmit(e)}>
                 <div className="font-[algerian] font-bold text-xl text-center">SUBJECT CREATION</div>
                 <div className="font-light text-purple-700 text-center">{msg}</div>
                 <div className="">

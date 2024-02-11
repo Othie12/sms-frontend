@@ -88,6 +88,11 @@ export default function EditStudent({stdnt, repull, setRepull}: {stdnt: Student,
                         <label htmlFor="dob">D.O.B:</label>
                         <input className="inputstyle" type="date" aria-controls="true" name="dob" onChange={e => handleInputChange(e)} value={student && student.dob} />
                     </div>
+    
+                    <div className="mt-4 flex flex-col">
+                        <label htmlFor="doj">Date of joining:</label>
+                        <input className="inputstyle" type="date" aria-controls="true" name="doj" onChange={e => handleInputChange(e)} value={student && student.doj} />
+                    </div>
 
                     <div className="mt-4 flex flex-col">
                         <label htmlFor="parent_id">Parent:</label>

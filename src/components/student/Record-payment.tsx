@@ -65,7 +65,7 @@ export default function RecordPayment(p: paymentProps){
 
                 <div className="mt-4 flex flex-col" >
                     <label htmlFor="payement_method">Payment method</label>
-                    <select className="inputstyle" name='payement_method'>
+                    <select className="inputstyle" name='payement_method' onChange={e => handleInputChange(e)} >
                         <option value="Cash">Cash</option>
                         <option value="Bank">Bank</option>
                         <option value="Mobile Money">Mobile Money</option>
